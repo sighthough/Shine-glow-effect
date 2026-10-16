@@ -3,8 +3,7 @@ So the main idea was since we already have shines working on our 3d models why n
 
 👉 **[CLICK HERE TO RUN THE LIVE DEMO](https://sighthough.github.io/Shine-glow-effect/)**
 
-
-
+*Co-authored by [sighthough](https://youtu.be/UtPiUGwu-0Q) and [Googles Gemini](https://www.youtube.com/shorts/R3Qo4rBgrD8).*
 
 ```markdown
 # Specular Bloom 3D Engine
