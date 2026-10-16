@@ -142,7 +142,7 @@ animate();
 
 ## 📄 License
 
-This project is open source under the [MIT License](https://www.google.com/search?q=LICENSE).
+This project is open source under the [MIT License]((https://github.com/sighthough/Shine-glow-effect/blob/main/LICENSE)).
 
 ```
 
