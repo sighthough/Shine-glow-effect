@@ -128,17 +128,6 @@ animate();
 
 ```
 
-## 🚀 Getting Started Locally
-
-1. Clone the repository:
-
-```bash
-   git clone [https://github.com/your-username/specular-bloom-3d.git](https://github.com/your-username/specular-bloom-3d.git)
-   
-
-```
-
-2. Open `index.html` directly in any modern WebGL-enabled browser, or serve it via a local static server (e.g., Live Server in VS Code).
 
 ## 📄 License
 
