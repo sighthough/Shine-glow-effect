@@ -9,27 +9,38 @@ So the main idea was since we already have shines working on our 3d models why n
 ```markdown
 # Specular Bloom 3D Engine
 
-A high-performance WebGL boilerplate demonstrating **HDR-driven Specular Bloom** using Three.js. This project explores how to couple Physically Based Rendering (PBR) specular highlights with a post-processing Unreal Bloom pass to create organic, glowing highlights on 3D surfaces without artificially emitting light from the entire mesh.
+A high-performance WebGL boilerplate demonstrating **HDR-driven Specular Bloom** using Three.js.
+This project explores how to couple Physically Based Rendering (PBR) specular highlights with
+a post-processing Unreal Bloom pass to create organic, glowing highlights on 3D surfaces without
+ artificially emitting light from the entire mesh.
 
 ## 🔬 How It Works (The Technical Concept)
 
-Standard WebGL bloom typically applies a glow to the entire scene based on color brightness (RGB > threshold). If an object is bright white, it glows uniformly.
+Standard WebGL bloom typically applies a glow to the entire scene based on color brightness (RGB > threshold).
+ If an object is bright white, it glows uniformly.
 
 This engine achieves **specular-only blooming** by leveraging:
 
-1. **High Dynamic Range (HDR) Lighting:** Light intensities and material specular responses push pixel values well beyond standard LDR range ($> 1.0$).
+1. **High Dynamic Range (HDR) Lighting:** Light intensities and material specular responses push pixel
+values well beyond standard LDR range ($> 1.0$).
 
-2. **ACES Filmic Tone Mapping:** Maps HDR values back to displayable range while preserving highlights, allowing peak specular reflections to remain extremely bright.
+2. **ACES Filmic Tone Mapping:** Maps HDR values back to displayable range while preserving highlights,
+ allowing peak specular reflections to remain extremely bright.
 
-3. **Luminosity High-Pass Filtering (`UnrealBloomPass`):** Extracts only those pixels whose luminance exceeds a strict threshold (e.g., `0.4` to `0.8`). Because only tight PBR specular pinpricks cross this threshold on smooth metallic surfaces, *only the reflections/shines bloom*, leaving the diffuse body color intact.
+3. **Luminosity High-Pass Filtering (`UnrealBloomPass`):** Extracts only those pixels whose luminance
+ exceeds a strict threshold (e.g., `0.4` to `0.8`). Because only tight PBR specular pinpricks cross
+ this threshold on smooth metallic surfaces, *only the reflections/shines bloom*, leaving the diffuse
+body color intact.
 
 ## 🛠️ Implementation Guide for Developers
 
-If you want to integrate this specular bloom technique into your own Three.js or WebGL project, follow this architectural setup:
+If you want to integrate this specular bloom technique into your own Three.js or WebGL project,
+ follow this architectural setup:
 
 ### 1. Configure Renderer with Tone Mapping
 
-You must enable tone mapping to handle HDR values. Without ACES Filmic or Reinhardt tone mapping, bright highlights will simply clip to pure white and cause the entire mesh to bloom uniformly.
+You must enable tone mapping to handle HDR values. Without ACES Filmic or Reinhardt tone mapping,
+ bright highlights will simply clip to pure white and cause the entire mesh to bloom uniformly.
 
 ```javascript
 import * as THREE from 'three';
@@ -72,7 +83,8 @@ composer.addPass(bloomPass);
 
 ### 3. Material & Light Tuning for Specular Bloom
 
-To get the glowing shine effect, use `MeshPhysicalMaterial` with low roughness, high metalness, and high-intensity directional lights.
+To get the glowing shine effect, use `MeshPhysicalMaterial` with low roughness, high metalness,
+and high-intensity directional lights.
 
 ```javascript
 const material = new THREE.MeshPhysicalMaterial({
@@ -115,10 +127,14 @@ animate();
 
 | Parameter | Recommended Range | Effect |
 | --- | --- | --- |
-| **Bloom Threshold** | `0.3 – 0.6` | Lower values make broader surface areas glow; higher values restrict glow strictly to the sharpest core highlights. |
-| **Bloom Strength** | `1.0 – 2.5` | Controls the intensity of the light scattering halo. Too high will cause artifacting/bleeding. |
-| **Material Roughness** | `0.05 – 0.25` | Lower roughness concentrates reflected light into tight microfacet spikes, triggering intense bloom. |
-| **Light Intensity** | `3.0 – 7.0` | Must be high enough to push surface radiance past the tone mapping and bloom threshold floor. |
+| **Bloom Threshold** | `0.3 – 0.6` | Lower values make broader surface areas glow; 
+higher values restrict glow strictly to the sharpest core highlights. |
+| **Bloom Strength** | `1.0 – 2.5` | Controls the intensity of the light scattering halo. 
+Too high will cause artifacting/bleeding. |
+| **Material Roughness** | `0.05 – 0.25` | Lower roughness concentrates reflected light
+into tight microfacet spikes, triggering intense bloom. |
+| **Light Intensity** | `3.0 – 7.0` | Must be high enough to push surface radiance past
+the tone mapping and bloom threshold floor. |
 
 ## 📦 Project Structure
 
